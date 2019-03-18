@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  .container
+    table.table
+      thead.thead-dark
+        th(scope="col") Name
+        th(scope="col") Email
+        th(scope="col") Mobile
+        th(scope="col") Password
+        th(scope="col") Address
+        th(scope="col") City
+        th(scope="col") State
+        th(scope="col") Zip
+        th(scope="col") Image
+        th(scope="col") Action
+      tbody
+        for row in rows
+          tr
+            td=row.Name
+            td=row.Email
+            td=row.Mobile
+            td=row.Password
+            td=row.Address
+            td=row.City
+            td=row.State
+            td=row.Zip
+            td
+              img.w-100(src="/uploads/"+row.Image)
+            td
+              a.btn.btn-small.btn-warning(href="/edit/"+row.Image) Edit
+              a.btn.btn-small.btn-danger(href="/delete/"+row.Image) Delete

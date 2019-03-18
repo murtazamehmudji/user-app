@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>User's App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="/siofu/client.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="border mt-5">
+            <h1 class="text-center py-3 bg-dark text-white heading" style="border-bottom: 1px solid lightgrey">Add User</h1>
+            <div class="container">
+                <div class="alert alert-success" id="message"></div>
+                <div class="alert alert-danger" id="error"></div>
+            </div>
+            <form class="px-5 py-3" id="signup_form" method="post" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="name_field">Name</label>
+                        <input class="form-control" type="text" id="name_field" name="name" placeholder="Name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="email">Email</label>
+                        <input class="form-control" type="email" id="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="mobile">Mobile</label>
+                        <input class="form-control" type="text" maxlength="10" id="mobile" name="mobile" placeholder="Mobile">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="password">Password</label>
+                        <input class="form-control" type="password" id="password" name="password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input class="form-control" type="text" id="address" name="address" placeholder="1234 Main St">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="city">City</label>
+                        <input class="form-control" type="text" id="city" name="city" placeholder="City">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="state">State</label>
+                        <select class="form-control" name="state" id="state">
+                            <option>Madhya Pradesh</option>
+                            <option>Maharashtra</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="zip">Zip</label>
+                        <input class="form-control" type="text" maxlength="6" id="zip" name="zip" placeholder="452012">
+                    </div>
+                    <div class="form-group">
+                        <!-- <button type="button" class="btn btn-dark" id="image" name="image">Select File</button> -->
+                        <!-- <input type="text" style="border:none; background: none" disabled="disabled" id="image_name" name="image_name"> -->
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">Sign up</button>
+            </form>
+            <form class="px-5 py-3" id="edit_form" method="post" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="edit_name_field">Name</label>
+                        <input class="form-control" type="text" id="edit_name_field" name="edit_name" placeholder="Name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="edit_email">Email</label>
+                        <input class="form-control" type="email" id="edit_email" name="edit_email" placeholder="Email">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="edit_mobile">Mobile</label>
+                        <input class="form-control" type="text" maxlength="10" id="edit_mobile" name="edit_mobile"placeholder="Mobile">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="edit_password">Password</label>
+                        <input class="form-control" type="password" id="edit_password" name="edit_password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="edit_address">Address</label>
+                    <input class="form-control" type="text" id="edit_address" name="edit_address" placeholder="1234 Main St">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="edit_city">City</label>
+                        <input class="form-control" type="text" id="edit_city" name="edit_city" placeholder="City">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="edit_state">State</label>
+                        <select class="form-control" name="edit_state" id="edit_state">
+                            <option>Madhya Pradesh</option>
+                            <option>Maharashtra</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="edit_zip">Zip</label>
+                        <input class="form-control" type="text" maxlength="6" id="edit_zip" name="edit_zip" placeholder="452012">
+                    </div>
+                    <div class="form-group">
+                        <!-- <button type="button" class="btn btn-dark" id="new_image" name="new_image">Select File</button> -->
+                        <!-- <input type="text" style="border:none; background: none" disabled="disabled" id="new_image_name" name="new_image_name"> -->
+                        <input type="hidden" name="old_image" id="old_image">
+                    </div>
+                </div>
+                <input type="hidden" id="id_field">
+                <button class="btn btn-primary" type="submit">Update</button>
+            </form>
+        </div>
+        <div class="text-center my-4">
+            <button class="btn btn-primary adduserbtn">Add User</button>
+        </div>
+        <table class="table">
+            <thead class="thead-dark">
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Password</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Image</th>
+                <th>Action</th>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="/script.js"></script>
+</body>
+
+</html>

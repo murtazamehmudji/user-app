@@ -1,0 +1,98 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  meta(http-equiv='X-UA-Compatible' content='ie=edge')
+  title User&apos;s App
+  link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css' integrity='sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS' crossorigin='anonymous')
+  link(rel='stylesheet' href='/styles.css')
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js')
+  script(src='/client.min.js')
+.container
+  .border.mt-5
+    h1.text-center.py-3.bg-dark.text-white.heading(style='border-bottom: 1px solid lightgrey') Add User
+    form#signup_form.px-5.py-3(method='post' enctype='multipart/form-data')
+      .form-row
+        .form-group.col-md-6
+          label(for='name_field') Name
+          input#name_field.form-control(type='text' name='name' placeholder='Name')
+        .form-group.col-md-6
+          label(for='email') Email
+          input#email.form-control(type='email' name='email' placeholder='Email')
+        .form-group.col-md-6
+          label(for='mobile') Mobile
+          input#mobile.form-control(type='text' maxlength='10' name='mobile' placeholder='Mobile')
+        .form-group.col-md-6
+          label(for='password') Password
+          input#password.form-control(type='password' name='password' placeholder='Password')
+      .form-group
+        label(for='address') Address
+        input#address.form-control(type='text' name='address' placeholder='1234 Main St')
+      .form-row
+        .form-group.col-md-6
+          label(for='city') City
+          input#city.form-control(type='text' name='city' placeholder='City' onkeypress='return /[a-z]/i.test(event.key)')
+        .form-group.col-md-4
+          label(for='state') State
+          select#state.form-control(name='state')
+            option Madhya Pradesh
+            option Maharashtra
+        .form-group.col-md-2
+          label(for='zip') Zip
+          input#zip.form-control(type='text' maxlength='6' name='zip' placeholder='452012')
+        .form-group
+          button.btn.btn-primary(type='submit') Sign up
+    form#edit_form.px-5.py-3(method='post' enctype='multipart/form-data')
+      .form-row
+        .form-group.col-md-6
+          label(for='edit_name_field') Name
+          input#edit_name_field.form-control(type='text' name='name' placeholder='Name')
+        .form-group.col-md-6
+          label(for='edit_email') Email
+          input#edit_email.form-control(type='email' name='email' placeholder='Email')
+        .form-group.col-md-6
+          label(for='edit_mobile') Mobile
+          input#edit_mobile.form-control(type='text' maxlength='10' name='mobile' placeholder='Mobile')
+        .form-group.col-md-6
+          label(for='edit_password') Password
+          input#edit_password.form-control(type='password' name='password' placeholder='Password')
+      .form-group
+        label(for='edit_address') Address
+        input#edit_address.form-control(type='text' name='address' placeholder='1234 Main St' onkeypress='return /[a-z]/i.test(event.key)')
+      .form-row
+        .form-group.col-md-6
+          label(for='edit_city') City
+          input#edit_city.form-control(type='text' name='city' placeholder='City')
+        .form-group.col-md-4
+          label(for='edit_state') State
+          select#edit_state.form-control(name='state')
+            option Madhya Pradesh
+            option Maharashtra
+        .form-group.col-md-2
+          label(for='edit_zip') Zip
+          input#edit_zip.form-control(type='text' maxlength='6' name='zip' placeholder='452012')
+        .form-group
+          input#old_image(type='hidden' name='old_image')
+          input#id_field(type='hidden' name='id')
+          button.btn.btn-primary(type='submit') Update
+  .text-center.my-4
+    button.btn.btn-primary.adduserbtn Add User
+  table.table
+    thead.thead-dark
+      th Name
+      th Email
+      th Mobile
+      th Password
+      th Address
+      th City
+      th State
+      th Zip
+      th Image
+      th Action
+    tbody
+script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js' integrity='sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo' crossorigin='anonymous')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js' integrity='sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut' crossorigin='anonymous')
+script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js' integrity='sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k' crossorigin='anonymous')
+script(src='https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js')
+script(src='/script.js')
+script(src='https://unpkg.com/sweetalert/dist/sweetalert.min.js')

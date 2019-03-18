@@ -1,0 +1,68 @@
+extends layout
+
+block content
+  a.btn.btn-primary(href='/list') List
+  .col-6.mx-auto.border
+    h1.text-center.pt-4 SignUp
+    hr
+    if success
+      .alert.alert-success User Added Successfully
+    form.p-3(id="signup_form" method="post" enctype="multipart/form-data")
+      .form-row
+        .form-group.col-md-6
+          label(for='name') Name
+          input.form-control(type='text' id="name" name='name' placeholder='Name' value=(undefined===user ? '' : user.name))
+          if errors
+            if errors.param=="name"
+              .error Please Enter a valid Name
+        .form-group.col-md-6
+          label(for='email') Email
+          input.form-control(type='email' id="email" name='email' placeholder='Email' value=(undefined===user ? '' : user.email))
+          if errors
+            if errors.param=="email"
+              .error Please Enter a valid Email
+        .form-group.col-md-6
+          label(for='mobile') Mobile
+          input.form-control(type='text' maxlength="10" id='mobile' name='mobile' placeholder='Mobile' value=(undefined===user ? '' : user.mobile))
+          if errors
+            if errors.param=="mobile"
+              .error Please Enter a valid 10 digit Mobile
+        .form-group.col-md-6
+          label(for='password') Password
+          input.form-control(type='password' id='password' name='password' placeholder='Password' value=(undefined===user ? '' : user.password))
+          if errors
+            if errors.param=="password"
+              .error Please Enter a valid Password
+      .form-group
+        label(for='address') Address
+        input.form-control(type='text' id='address' name='address' placeholder='1234 Main St' value=(undefined===user ? '' : user.address))
+        if errors
+            if errors.param=="address"
+              .error Please Enter Address
+      .form-row
+        .form-group.col-md-6
+          label(for='city') City
+          input.form-control(type='text' id='city' name='city' placeholder='City' value=(undefined===user ? '' : user.city))
+          if errors
+            if errors.param=="city"
+              .error Please Enter a valid City
+        .form-group.col-md-4
+          label(for='state') State
+          select.form-control(name='state' id='state' value=(undefined===user ? '' : user.state))
+            option Madhya Pradesh
+            option Maharashtra
+          if errors
+            if errors.param=="state"
+              .error Please Enter a State
+        .form-group.col-md-2
+          label(for='zip') Zip
+          input.form-control(type='text' maxlength="6" id='zip' name='zip' placeholder="452012" value=(undefined===user ? '' : user.zip))
+          if errors
+            if errors.param=="zip"
+              .error Please Enter a valid Zip Code
+        .form-group
+          input(type='file' id='image' name='image')
+      button.btn.btn-primary(type='submit') Sign up
+  script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+  script(src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js")
+  script(src="/javascripts/validate.js")
